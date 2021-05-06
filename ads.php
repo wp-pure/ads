@@ -250,7 +250,13 @@ add_filter( 'manage_edit-ad_group_columns', 'ad_remove_tax_description' );
 
 // add
 function ad_group_shortcode_column( $columns ) {
-    $columns['shortcode'] = 'Shortcode';
+    $columns = array(
+    	'cb' => $columns['cb'],
+    	'name' => 'Name',
+    	'slug' => 'Slug',
+    	'shortcode' => 'Shortcode',
+    	'posts' => 'Count',
+    );
     return $columns;
 }
 add_filter( 'manage_edit-ad_group_columns', 'ad_group_shortcode_column' );
