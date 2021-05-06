@@ -1,0 +1,13 @@
+
+
+.promos {
+	position: relative;
+}
+
+.promo {
+	display: none;
+}
+
+.promo:first-child {
+	display: block;
+}
