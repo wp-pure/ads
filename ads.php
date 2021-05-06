@@ -157,7 +157,7 @@ function ad_shortcode( $atts ) {
 				$return = '<div class="promos">';
 				foreach ( $ads as $ad ) {				
 					$ad_info = get_post_meta( $ad->ID );
-					$return .= '<div class="promo"><a href="' . $ad_info['ad_image'][0] . '"><img src="' . $ad_info['ad_image'][0] . '"></a></div>';
+					$return .= '<div class="promo"><a href="' . $ad_info['ad_link'][0] . '"><img src="' . $ad_info['ad_image'][0] . '"></a></div>';
 				}
 				$return .= '</div>';
 
@@ -165,7 +165,7 @@ function ad_shortcode( $atts ) {
 			} else {
 
 				$ad_info = get_post_meta( $ads[0]->ID );
-				$return = '<div class="promo"><a href="' . $ad_info['ad_image'][0] . '"><img src="' . $ad_info['ad_image'][0] . '"></a></div>';
+				$return = '<div class="promo"><a href="' . $ad_info['ad_link'][0] . '"><img src="' . $ad_info['ad_image'][0] . '"></a></div>';
 
 			}
 
