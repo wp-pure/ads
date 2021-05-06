@@ -183,6 +183,21 @@ add_shortcode( 'ad', 'ad_shortcode' );
 
 
 
+// a function to output an ad group
+function do_ad_group( $group = '' ) {
+
+	// make sure a group has been specified
+	if ( !empty( $group ) ) {
+
+		// just output the shortcode.
+		print do_shortcode( '[ad group="' . $group . '" /]' );
+
+	}
+	
+}
+
+
+
 // custom admin listing column to output the shortcode for each snipper
 function ad_columns( $columns ) {
 
