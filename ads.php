@@ -236,6 +236,44 @@ add_filter( 'months_dropdown_results', 'ad_remove_date_filter' );
 
 
 
+// remove the description column from the ad_group taxonomy
+function ad_remove_tax_description( $columns ) {
+	if ( isset( $columns['description'] ) ) {
+		unset( $columns['description'] );   
+	}
+
+	return $columns;
+} 
+add_filter( 'manage_edit-ad_group_columns', 'ad_remove_tax_description' );
+
+
+
+// add
+function ad_group_shortcode_column( $columns ) {
+    $columns['shortcode'] = 'Shortcode';
+    return $columns;
+}
+add_filter( 'manage_edit-ad_group_columns', 'ad_group_shortcode_column' );
+
+
+
+// set the shortcode column content
+function ad_group_shortcode_column_content( $content,$column_name,$term_id ) {
+    $term = get_term( $term_id, 'ad_group');
+    switch ( $column_name ) {
+        case 'shortcode':
+            //do your stuff here with $term or $term_id
+            $content = '[ad group="' . $term->slug . '" /]';
+            break;
+        default:
+            break;
+    }
+    return $content;
+}
+add_filter( 'manage_ad_group_custom_column', 'ad_group_shortcode_column_content', 10, 3 );
+
+
+
 // sort snippets by title in the dashboard listing.
 function ad_order( $query ) {
 
