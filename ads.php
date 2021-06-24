@@ -295,6 +295,26 @@ add_filter( 'manage_ad_group_custom_column', 'ad_group_shortcode_column_content'
 
 
 
+// select all ad groups and return an array
+function get_ad_groups() {
+
+	// get the groups
+    $ad_groups = get_terms( 'ad_group' );
+
+    // empty array
+    $groups = array();
+
+    //loop through them and add them to the groups
+    foreach ( $ad_groups as $cat ) {
+        $groups[$cat->slug] = $cat->name;
+    }
+
+    // return them
+    return $groups;
+}
+
+
+
 // sort snippets by title in the dashboard listing.
 function ad_order( $query ) {
 
