@@ -138,9 +138,16 @@ function ad_shortcode( $atts ) {
 			$args = array(
 				'post_type' => 'ad',
 				'numberposts' => -1,
-				'ad_group' => $atts['group'],
 				'orderby' => 'rand',
-				'order' => 'ASC'
+				'order' => 'ASC',
+				'tax_query' => array(
+					array(
+						'taxonomy' => 'ad_group',
+						'field' => 'slug', 
+						'terms' => $atts['group'],
+						'include_children' => false
+					)
+				)
 			);
 		}
 
