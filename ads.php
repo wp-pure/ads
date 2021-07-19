@@ -341,8 +341,8 @@ add_action( 'pre_get_posts', 'ad_order', 1 );
 
 // include the main.js script in the header on the front-end.
 function ad_assets() {
-	wp_enqueue_style( 'ads-css', plugin_dir_url( __FILE__ ) . 'ads.css' );
-	wp_enqueue_script( 'ads-js', plugin_dir_url( __FILE__ ) . 'ads.js', array( 'jquery' ), false, true );
+	wp_enqueue_style( 'ads-css', plugin_dir_url( __FILE__ ) . 'ads.css?v=2' );
+	wp_enqueue_script( 'ads-js', plugin_dir_url( __FILE__ ) . 'ads.js?v=2', array( 'jquery' ), false, true );
 }
 add_action( 'wp_enqueue_scripts', 'ad_assets' );
 
