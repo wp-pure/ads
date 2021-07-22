@@ -25,6 +25,7 @@ jQuery(document).ready(function($){
 
 				// show the next ad
 				next_ad.show();		
+
 			} else {
 
 				// hide visible ad
@@ -35,7 +36,7 @@ jQuery(document).ready(function($){
 
 			}
 
-		}, 15000 );
+		}, 5000 );
 
 	});
 
