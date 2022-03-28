@@ -124,17 +124,27 @@ add_filter( 'cmb2_admin_init', 'ad_metabox' );
 // function to handle the snippet shortcode
 function ad_shortcode( $atts ) {
 
+	// set default params and override with those in shortcode
+	extract( shortcode_atts( array(
+		'group' => '',
+		'slug' => '',
+		'time' => 5,
+	), $atts ));
+
+	print $time;
+
 	// if we have a slug specified
-	if ( !empty( $atts ) ) {
+	if ( !empty( $group ) || !empty( $slug ) ) {
+
 
 		// let's set the args for our select
-		if ( isset( $atts['slug'] ) ) {
+		if ( !empty( $slug ) ) {
 			$args = array(
-				'name' => $atts['slug'],
+				'name' => $slug,
 				'post_type' => 'ad',
 				'numberposts' => 1
 			);
-		} else if ( $atts['group'] ) {
+		} else if ( $group ) {
 			$args = array(
 				'post_type' => 'ad',
 				'numberposts' => -1,
@@ -144,7 +154,7 @@ function ad_shortcode( $atts ) {
 					array(
 						'taxonomy' => 'ad_group',
 						'field' => 'slug', 
-						'terms' => $atts['group'],
+						'terms' => $group,
 						'include_children' => false
 					)
 				)
@@ -161,7 +171,7 @@ function ad_shortcode( $atts ) {
 			// if this is more than one ad, use a rotator
 			if ( count( $ads ) > 1 ) {
 
-				$return = '<div class="promos">';
+				$return = '<div class="promos" data-time="' . ( $time * 1000 ) . '">';
 				foreach ( $ads as $ad ) {				
 					$ad_info = get_post_meta( $ad->ID );
 					$return .= '<div class="promo"><a href="' . $ad_info['ad_link'][0] . '"><img src="' . $ad_info['ad_image'][0] . '"></a></div>';
@@ -191,13 +201,13 @@ add_shortcode( 'ad', 'ad_shortcode' );
 
 
 // a function to output an ad group
-function do_ad_group( $group = '' ) {
+function do_ad_group( $group = '', $time = 5 ) {
 
 	// make sure a group has been specified
 	if ( !empty( $group ) ) {
 
 		// just output the shortcode.
-		print do_shortcode( '[ad group="' . $group . '" /]' );
+		print do_shortcode( '[ad group="' . $group . '" time="' . $time . '" /]' );
 
 	}
 	
@@ -341,8 +351,8 @@ add_action( 'pre_get_posts', 'ad_order', 1 );
 
 // include the main.js script in the header on the front-end.
 function ad_assets() {
-	wp_enqueue_style( 'ads-css', plugin_dir_url( __FILE__ ) . 'ads.css?v=2' );
-	wp_enqueue_script( 'ads-js', plugin_dir_url( __FILE__ ) . 'ads.js?v=2', array( 'jquery' ), false, true );
+	wp_enqueue_style( 'ads-css', plugin_dir_url( __FILE__ ) . 'ads.css?v=3' );
+	wp_enqueue_script( 'ads-js', plugin_dir_url( __FILE__ ) . 'ads.js?v=3', array( 'jquery' ), false, true );
 }
 add_action( 'wp_enqueue_scripts', 'ad_assets' );
 

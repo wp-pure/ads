@@ -8,6 +8,9 @@ jQuery(document).ready(function($){
 
 		var ad_group = $(this);
 
+		var time = $(this).data( 'time' );
+		if ( time == 0 ) time = 5000;
+
 		// change ads on an interval
 		var ad_interval = setInterval(function(){
 
@@ -36,7 +39,7 @@ jQuery(document).ready(function($){
 
 			}
 
-		}, 5000 );
+		}, time );
 
 	});
 
