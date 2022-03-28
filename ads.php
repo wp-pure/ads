@@ -131,8 +131,6 @@ function ad_shortcode( $atts ) {
 		'time' => 5,
 	), $atts ));
 
-	print $time;
-
 	// if we have a slug specified
 	if ( !empty( $group ) || !empty( $slug ) ) {
 
