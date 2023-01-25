@@ -170,9 +170,10 @@ function ad_shortcode( $atts ) {
 			if ( count( $ads ) > 1 ) {
 
 				$return = '<div class="promos" data-time="' . ( $time * 1000 ) . '">';
-				foreach ( $ads as $ad ) {				
+				foreach ( $ads as $ad ) {
 					$ad_info = get_post_meta( $ad->ID );
-					$return .= '<div class="promo"><a href="' . $ad_info['ad_link'][0] . '"><img src="' . $ad_info['ad_image'][0] . '"></a></div>';
+					$link = ( isset( $ad_info['ad_link'][0] ) ? $ad_info['ad_link'][0] : '' );
+					$return .= '<div class="promo">' . ( !empty( $link ) ? '<a href="' . $link . '">' : '' ) . '<img src="' . $ad_info['ad_image'][0] . '">' . ( !empty( $link ) ? '</a>' : '' ) . '</div>';
 				}
 				$return .= '</div>';
 
@@ -180,7 +181,8 @@ function ad_shortcode( $atts ) {
 			} else {
 
 				$ad_info = get_post_meta( $ads[0]->ID );
-				$return = '<div class="promo"><a href="' . $ad_info['ad_link'][0] . '"><img src="' . $ad_info['ad_image'][0] . '"></a></div>';
+				$link = ( isset( $ad_info['ad_link'][0] ) ? $ad_info['ad_link'][0] : '' );
+				$return = '<div class="promo">' . ( !empty( $link ) ? '<a href="' . $link . '">' : '' ) . '<img src="' . $ad_info['ad_image'][0] . '">' . ( !empty( $link ) ? '</a>' : '' ) . '</div>';
 
 			}
 
